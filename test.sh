@@ -95,7 +95,7 @@ main() {
         wrong_usage "TEST_SUITE is not a directory: $test_suite_dir"
     fi
 
-    test_suite_dir=$(realpath $test_suite_dir)
+    test_suite_dir=$(readlink -f $test_suite_dir)
 
     msg "Test suite dir: $test_suite_dir/before"
     if [[ ! -d "$test_suite_dir/before" ]]; then
