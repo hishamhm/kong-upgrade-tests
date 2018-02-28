@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-./test.sh -d $DB -b kong:$SRC -t kong:$DST $TEST
+./test.sh -d $DATABASE -b kong:$SRC_V -t kong:$DST_V $UPATH

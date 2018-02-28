@@ -26,21 +26,21 @@ env:
     - DOWNLOAD_CACHE=$HOME/download-cache
     - INSTALL_CACHE=$HOME/install-cache
   matrix:
-    - TEST=upgrade_paths/0.11_0.12  SRC=0.11.0          DST=release/0.12.2  DB=postgres
-    - TEST=upgrade_paths/0.11_0.12  SRC=0.11.0          DST=release/0.12.2  DB=cassandra  CASSANDRA=2.2.8
-    - TEST=upgrade_paths/0.11_0.12  SRC=0.11.0          DST=release/0.12.2  DB=cassandra  CASSANDRA=3.9
+    - UPATH=upgrade_paths/0.11_0.12  SRC_V=0.11.0          DST_V=release/0.12.2  DATABASE=postgres
+    - UPATH=upgrade_paths/0.11_0.12  SRC_V=0.11.0          DST_V=release/0.12.2  DATABASE=cassandra  CASSANDRA=2.2.8
+    - UPATH=upgrade_paths/0.11_0.12  SRC_V=0.11.0          DST_V=release/0.12.2  DATABASE=cassandra  CASSANDRA=3.9
 
-    - TEST=upgrade_paths/0.12_0.13  SRC=0.12.0          DST=release/0.13.0  DB=postgres
-    - TEST=upgrade_paths/0.12_0.13  SRC=0.12.0          DST=release/0.13.0  DB=cassandra  CASSANDRA=2.2.8
-    - TEST=upgrade_paths/0.12_0.13  SRC=0.12.0          DST=release/0.13.0  DB=cassandra  CASSANDRA=3.9
+    - UPATH=upgrade_paths/0.12_0.13  SRC_V=0.12.0          DST_V=release/0.13.0  DATABASE=postgres
+    - UPATH=upgrade_paths/0.12_0.13  SRC_V=0.12.0          DST_V=release/0.13.0  DATABASE=cassandra  CASSANDRA=2.2.8
+    - UPATH=upgrade_paths/0.12_0.13  SRC_V=0.12.0          DST_V=release/0.13.0  DATABASE=cassandra  CASSANDRA=3.9
 
-    - TEST=upgrade_paths/0.12_0.13  SRC=0.12.1          DST=release/0.13.0  DB=postgres
-    - TEST=upgrade_paths/0.12_0.13  SRC=0.12.1          DST=release/0.13.0  DB=cassandra  CASSANDRA=2.2.8
-    - TEST=upgrade_paths/0.12_0.13  SRC=0.12.1          DST=release/0.13.0  DB=cassandra  CASSANDRA=3.9
+    - UPATH=upgrade_paths/0.12_0.13  SRC_V=0.12.1          DST_V=release/0.13.0  DATABASE=postgres
+    - UPATH=upgrade_paths/0.12_0.13  SRC_V=0.12.1          DST_V=release/0.13.0  DATABASE=cassandra  CASSANDRA=2.2.8
+    - UPATH=upgrade_paths/0.12_0.13  SRC_V=0.12.1          DST_V=release/0.13.0  DATABASE=cassandra  CASSANDRA=3.9
 
-    - TEST=upgrade_paths/0.12_0.13  SRC=release/0.12.2  DST=release/0.13.0  DB=postgres
-    - TEST=upgrade_paths/0.12_0.13  SRC=release/0.12.2  DST=release/0.13.0  DB=cassandra  CASSANDRA=2.2.8
-    - TEST=upgrade_paths/0.12_0.13  SRC=release/0.12.2  DST=release/0.13.0  DB=cassandra  CASSANDRA=3.9
+    - UPATH=upgrade_paths/0.12_0.13  SRC_V=release/0.12.2  DST_V=release/0.13.0  DATABASE=postgres
+    - UPATH=upgrade_paths/0.12_0.13  SRC_V=release/0.12.2  DST_V=release/0.13.0  DATABASE=cassandra  CASSANDRA=2.2.8
+    - UPATH=upgrade_paths/0.12_0.13  SRC_V=release/0.12.2  DST_V=release/0.13.0  DATABASE=cassandra  CASSANDRA=3.9
 
 before_install:
   - source .ci/setup_env.sh

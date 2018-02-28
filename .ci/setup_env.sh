@@ -38,8 +38,8 @@ mkdir -p $OPENSSL_INSTALL $OPENRESTY_INSTALL $LUAROCKS_INSTALL
 if [ ! "$(ls -A $OPENSSL_INSTALL)" ]; then
   pushd $OPENSSL_DOWNLOAD
     ./config shared --prefix=$OPENSSL_INSTALL &> build.log || (cat build.log && exit 1)
-    make Makefile build_libs build_apps build_tools &> build.log || (cat build.log && exit 1)
-    make install_docs install_sw &> build.log || (cat build.log && exit 1)
+    make &> build.log || (cat build.log && exit 1)
+    make install &> build.log || (cat build.log && exit 1)
   popd
 fi
 
