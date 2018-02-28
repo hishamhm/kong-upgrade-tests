@@ -20,7 +20,7 @@ addons:
 env:
   global:
     - LUAROCKS=2.4.3
-    - OPENSSL=1.0.2n
+    - OPENSSL=1.0.2m
     - CASSANDRA=2.2.8
     - OPENRESTY=1.11.2.5
     - DOWNLOAD_CACHE=$HOME/download-cache
