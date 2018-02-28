@@ -97,6 +97,7 @@ main() {
 
     test_suite_dir=$(realpath $test_suite_dir)
 
+    msg "Test suite dir: $test_suite_dir/before"
     if [[ ! -d "$test_suite_dir/before" ]]; then
         wrong_usage "TEST_SUITE does not contain migration data"
     fi
