@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+export PATH=/usr/lib/ccache:$PATH
+
 #---------
 # Download
 #---------
@@ -38,8 +40,8 @@ mkdir -p $OPENSSL_INSTALL $OPENRESTY_INSTALL $LUAROCKS_INSTALL
 if [ ! "$(ls -A $OPENSSL_INSTALL)" ]; then
   pushd $OPENSSL_DOWNLOAD
     ./config shared --prefix=$OPENSSL_INSTALL &> build.log || (cat build.log && exit 1)
-    make &> build.log || (cat build.log && exit 1)
-    make install &> build.log || (cat build.log && exit 1)
+    make build_libs &> build.log || (cat build.log && exit 1)
+    make install_sw DIRS="crypto ssl engines" &> build.log || (cat build.log && exit 1)
   popd
 fi
 

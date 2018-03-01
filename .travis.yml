@@ -16,6 +16,7 @@ addons:
       - net-tools
       - libpcre3-dev
       - build-essential
+      - ccache
 
 env:
   global:
@@ -55,3 +56,5 @@ cache:
     - $DOWNLOAD_CACHE
     - $INSTALL_CACHE
     - $HOME/.ccm/repository
+    - $HOME/.ccache
+
