@@ -174,6 +174,7 @@ main() {
             || show_error "createdb failed with: $?"
 
         export KONG_DATABASE=$DATABASE
+        export KONG_PG_USER=postgres
         export KONG_PG_HOST=$POSTGRES_HOST
         export KONG_PG_PORT=$POSTGRES_PORT
         export KONG_PG_DATABASE=$POSTGRES_DATABASE
