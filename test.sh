@@ -95,8 +95,9 @@ main() {
         wrong_usage "TEST_SUITE is not a directory: $test_suite_dir"
     fi
 
-    test_suite_dir=$(realpath $test_suite_dir)
+    test_suite_dir=$(readlink -f $test_suite_dir)
 
+    msg "Test suite dir: $test_suite_dir/before"
     if [[ ! -d "$test_suite_dir/before" ]]; then
         wrong_usage "TEST_SUITE does not contain migration data"
     fi
@@ -173,6 +174,7 @@ main() {
             || show_error "createdb failed with: $?"
 
         export KONG_DATABASE=$DATABASE
+        export KONG_PG_USER=postgres
         export KONG_PG_HOST=$POSTGRES_HOST
         export KONG_PG_PORT=$POSTGRES_PORT
         export KONG_PG_DATABASE=$POSTGRES_DATABASE
@@ -278,10 +280,15 @@ clone_or_pull_repo() {
 
     if [[ ! -d "$cache_dir/$repo" ]]; then
         pushd $cache_dir
-            msg "Cloning git@github.com:kong/$repo.git"
-            ssh-agent bash -c "ssh-add $ssh_key && \
-                git clone git@github.com:kong/$repo.git $repo" \
-                    || show_error "git clone failed with: $?"
+            if [[ "$repo" = "kong" ]]; then
+                msg "Cloning https://github.com/kong/$repo"
+                git clone https://github.com/kong/$repo || show_error "git clone failed with: $?"
+            else
+                msg "Cloning git@github.com:kong/$repo.git"
+                ssh-agent bash -c "ssh-add $ssh_key && \
+                    git clone git@github.com:kong/$repo.git $repo" \
+                        || show_error "git clone failed with: $?"
+            fi
         popd
     else
         pushd $cache_dir/$repo
@@ -404,7 +411,7 @@ failed_test() {
     msg_red "Failed: $1"
     builtin echo "  displaying last lines of: $log_file" >&6
     builtin echo "  -----------------------------------" >&6
-    grep ERROR -A50 $log_file >&6 || tail $log_file >&6
+    grep ERROR -A1000 $log_file >&6 || tail $log_file >&6
     echo_err
     exit 1
 }
@@ -419,7 +426,7 @@ show_error() {
     msg_red "Error: $1"
     builtin echo "  displaying last lines of: $log_file" >&6
     builtin echo "  -----------------------------------" >&6
-    grep ERROR -A50  $log_file >&6 || tail $log_file >&6
+    grep ERROR -A1000 $log_file >&6 || tail $log_file >&6
     echo_err
     exit 1
 }
