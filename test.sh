@@ -410,7 +410,7 @@ failed_test() {
     msg_red "Failed: $1"
     builtin echo "  displaying last lines of: $log_file" >&6
     builtin echo "  -----------------------------------" >&6
-    grep ERROR -A50 $log_file >&6 || tail $log_file >&6
+    grep ERROR -A1000 $log_file >&6 || tail $log_file >&6
     echo_err
     exit 1
 }
@@ -425,7 +425,7 @@ show_error() {
     msg_red "Error: $1"
     builtin echo "  displaying last lines of: $log_file" >&6
     builtin echo "  -----------------------------------" >&6
-    grep ERROR -A50  $log_file >&6 || tail $log_file >&6
+    grep ERROR -A1000 $log_file >&6 || tail $log_file >&6
     echo_err
     exit 1
 }
