@@ -279,10 +279,15 @@ clone_or_pull_repo() {
 
     if [[ ! -d "$cache_dir/$repo" ]]; then
         pushd $cache_dir
-            msg "Cloning git@github.com:kong/$repo.git"
-            ssh-agent bash -c "ssh-add $ssh_key && \
-                git clone git@github.com:kong/$repo.git $repo" \
-                    || show_error "git clone failed with: $?"
+            if [[ "$repo" = "kong" ]]; then
+                msg "Cloning https://github.com/kong/$repo"
+                git clone https://github.com/kong/$repo || show_error "git clone failed with: $?"
+            else
+                msg "Cloning git@github.com:kong/$repo.git"
+                ssh-agent bash -c "ssh-add $ssh_key && \
+                    git clone git@github.com:kong/$repo.git $repo" \
+                        || show_error "git clone failed with: $?"
+            fi
         popd
     else
         pushd $cache_dir/$repo
